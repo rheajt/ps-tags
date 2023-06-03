@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const getSections_1 = __importDefault(require("./getSections"));
 const enquirer_1 = require("enquirer");
+const quickReplace_1 = __importDefault(require("./quickReplace"));
 function init() {
     return __awaiter(this, void 0, void 0, function* () {
         const sections = (0, getSections_1.default)();
@@ -27,8 +28,8 @@ function init() {
             .filter((s) => s.section === section)[0]
             .tags.map((t) => ({
             name: t.name,
-            message: `${t.name} \n ${t.desc} \n ex: ${t.ex}`,
-            value: t.disp.replace("&#126;", "~"),
+            message: `${(0, quickReplace_1.default)(t.name)} - ${t.desc} \n ex: ${(0, quickReplace_1.default)(t.ex)}`,
+            value: (0, quickReplace_1.default)(t.disp),
         }));
         const resp = yield (0, enquirer_1.prompt)({
             type: "autocomplete",
