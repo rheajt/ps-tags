@@ -3,7 +3,8 @@ import { join } from "path";
 
 export default function getSections() {
     const dir = join(
-        "/home/jordanrhea/projects/powerschool/PowerSchool-DAT-Reference/plugin/web_root/admin/META/dat_reference/tags"
+        process.cwd(),
+        "dat-references/plugin/web_root/admin/META/dat_reference/tags"
     );
 
     const files = readdirSync(dir, "utf-8");

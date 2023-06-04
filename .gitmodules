@@ -1,0 +1,3 @@
+[submodule "dat-references"]
+	path = dat-references
+	url = git@github.com:rheajt/PowerSchool-DAT-Reference.git

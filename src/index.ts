@@ -1,6 +1,7 @@
 import getSections from "./getSections";
 import { prompt } from "enquirer";
 import quickReplace from "./quickReplace";
+import { execSync } from "child_process";
 
 async function init() {
     const sections = getSections();
@@ -16,9 +17,7 @@ async function init() {
         .filter((s) => s.section === section)[0]
         .tags.map((t) => ({
             name: t.name,
-            message: `${quickReplace(t.name)} - ${t.desc} \n ex: ${quickReplace(
-                t.ex
-            )}`,
+            message: `- ${t.desc} \n ex: ${quickReplace(t.ex)}`,
             value: quickReplace(t.disp),
         }));
 
@@ -29,7 +28,7 @@ async function init() {
         choices,
     });
 
-    console.log(resp.tag);
+    execSync(`echo '${resp.tag}' | xclip -sel clip`, { stdio: "inherit" });
 }
 
 init();
