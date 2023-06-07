@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
 const path_1 = require("path");
 function getSections() {
-    const dir = (0, path_1.join)("/home/jordanrhea/projects/powerschool/PowerSchool-DAT-Reference/plugin/web_root/admin/META/dat_reference/tags");
+    const dir = (0, path_1.join)(__dirname, "../dat-references/plugin/web_root/admin/META/dat_reference/tags");
     const files = (0, fs_1.readdirSync)(dir, "utf-8");
     let sections = [];
     for (let i = 0; i < files.length; i++) {

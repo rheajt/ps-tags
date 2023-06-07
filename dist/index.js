@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const getSections_1 = __importDefault(require("./getSections"));
 const enquirer_1 = require("enquirer");
 const quickReplace_1 = __importDefault(require("./quickReplace"));
+const child_process_1 = require("child_process");
 function init() {
     return __awaiter(this, void 0, void 0, function* () {
         const sections = (0, getSections_1.default)();
@@ -28,7 +29,7 @@ function init() {
             .filter((s) => s.section === section)[0]
             .tags.map((t) => ({
             name: t.name,
-            message: `${(0, quickReplace_1.default)(t.name)} - ${t.desc} \n ex: ${(0, quickReplace_1.default)(t.ex)}`,
+            message: `- ${t.desc} \n ex: ${(0, quickReplace_1.default)(t.ex)}`,
             value: (0, quickReplace_1.default)(t.disp),
         }));
         const resp = yield (0, enquirer_1.prompt)({
@@ -37,7 +38,7 @@ function init() {
             message: "What tags would you like to view?",
             choices,
         });
-        console.log(resp.tag);
+        (0, child_process_1.execSync)(`echo '${resp.tag}' | xclip -sel clip`, { stdio: "inherit" });
     });
 }
 init();
